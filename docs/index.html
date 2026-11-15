@@ -187,6 +187,9 @@ dialog::backdrop{background:rgba(6,5,4,.72)}
 .okbox{border:1px solid var(--good);border-radius:var(--r);padding:12px;font-size:14px}
 .okbox b{color:var(--good)}
 .dlg-actions{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap}
+#acct{display:none !important}
+.dcname{font-family:var(--mono);font-size:20px;font-weight:600;color:var(--brass)}
+.dcmsg{background:var(--bg);border:1px solid var(--line);border-radius:var(--r);padding:10px;font-size:13.5px;white-space:pre-wrap;overflow-wrap:anywhere;width:100%}
 .acct{display:flex;gap:8px;align-items:center;min-width:0}
 .acct .who{max-width:110px;overflow:hidden;text-overflow:ellipsis}
 .acct .bal{font-family:var(--mono);color:var(--brass)}
@@ -228,7 +231,6 @@ footer{padding-bottom:84px !important}
 </style>
 </head>
 <body>
-<div class="notice">Demo: accounts and wallets are saved in this browser only. No real money moves.</div>
 
 <header class="top">
   <div class="wrap">
@@ -252,7 +254,7 @@ footer{padding-bottom:84px !important}
     <div class="wrap hero-grid">
       <div>
         <h1>Take the <em>high ground.</em></h1>
-        <p class="lede">Dota 2 boosting, calibration and coaching from our own team of boosters. Pick a service, pay into escrow, and the money is only released when your order is done.</p>
+        <p class="lede">Dota 2 boosting, calibration and coaching from our own team of boosters. Pick a service, see your exact price, and order directly with us on Discord.</p>
         <div class="hero-cta">
           <a class="btn primary" href="#offers">Browse services</a>
           <a class="btn ghost" href="#how">How it works</a>
@@ -277,16 +279,16 @@ footer{padding-bottom:84px !important}
         <div class="lines num" id="k-lines"></div>
         <p class="err" id="k-err" role="alert"></p>
         <div class="total"><span>Your price</span><span class="price" id="k-total"></span></div>
-        <button class="btn primary" type="button" id="k-order">Order this boost</button>
+        <button class="btn primary" type="button" id="k-order">Order on Discord</button>
         <div id="k-done"></div>
       </div>
     </div>
     <div class="wrap">
       <div class="trust">
-        <div><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#d6b066" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg><p style="margin:0"><b>Escrow payment</b><span>Released only when you confirm</span></p></div>
-        <div><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#d6b066" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9h10a6 6 0 010 12H8"/><path d="M8 5L4 9l4 4"/></svg><p style="margin:0"><b>Refund before delivery</b><span>Cancel any open order</span></p></div>
+        <div><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#d6b066" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg><p style="margin:0"><b>Order on Discord</b><span>Direct contact, no account needed</span></p></div>
+        <div><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#d6b066" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9h10a6 6 0 010 12H8"/><path d="M8 5L4 9l4 4"/></svg><p style="margin:0"><b>Exact price upfront</b><span>Calculated before you order</span></p></div>
         <div><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#d6b066" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.6-3.5 3.2-5.5 6.5-5.5s5.900 2 6.5 5.5"/><path d="M16 4.800a3.5 3.5 0 010 6.400M18.5 14.800c1.700.8 2.700 2.5 3 5.2"/></svg><p style="margin:0"><b>Party boost option</b><span>Play on your own account</span></p></div>
-        <div><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#d6b066" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg><p style="margin:0"><b>Order tracking</b><span>Status for every order</span></p></div>
+        <div><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#d6b066" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg><p style="margin:0"><b>European servers</b><span>Support in English</span></p></div>
       </div>
     </div>
   </section>
@@ -323,9 +325,9 @@ footer{padding-bottom:84px !important}
       <h2>How an order works</h2>
       <ol class="steps">
         <li><h4>Pick a service</h4><p>Filter by rank and service. Enter your current and target MMR or behavior score to see the exact price.</p></li>
-        <li><h4>Pay into escrow</h4><p>Your payment is held until the job is done. You can cancel for a full refund before delivery.</p></li>
-        <li><h4>Our booster delivers</h4><p>Message your booster in the order chat and follow the status in your account. Party boosts are played together on your own account.</p></li>
-        <li><h4>Confirm and release</h4><p>When the target is reached you confirm, the payment is released, and you leave a rating.</p></li>
+        <li><h4>Message us on Discord</h4><p>Press Order and send the prepared message to jackhanma14. We confirm the price, schedule and payment with you.</p></li>
+        <li><h4>Our booster delivers</h4><p>We agree on a start time and keep you updated on Discord. Party boosts are played together on your own account.</p></li>
+        <li><h4>Target reached</h4><p>We tell you on Discord as soon as your MMR or behavior score target is reached.</p></li>
       </ol>
     </div>
   </section>
@@ -335,10 +337,10 @@ footer{padding-bottom:84px !important}
       <p class="eyebrow">Why Highground</p>
       <h2>Built around your account's safety</h2>
       <div class="why">
-        <article><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#d6b066" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg><h4>Your money stays protected</h4><p>Payment sits in escrow from the moment you order. Nothing is released until you confirm the result.</p></article>
+        <article><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#d6b066" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg><h4>Direct contact</h4><p>You talk to us directly on Discord before, during and after your order.</p></article>
         <article><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#d6b066" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.6-3.5 3.2-5.5 6.5-5.5s5.900 2 6.5 5.5"/><path d="M16 4.800a3.5 3.5 0 010 6.400M18.5 14.800c1.700.8 2.700 2.5 3 5.2"/></svg><h4>Party boosts first</h4><p>Wherever possible you play on your own account while our booster queues with you. No login details are shared.</p></article>
-        <article><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#d6b066" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg><h4>Clear prices, no surprises</h4><p>Enter your current and target MMR and see the exact total before you pay. The price you see is the price you pay.</p></article>
-        <article><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#d6b066" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9h10a6 6 0 010 12H8"/><path d="M8 5L4 9l4 4"/></svg><h4>Cancel while it is open</h4><p>Changed your mind before delivery? Cancel the order in your account and the full amount returns to your wallet.</p></article>
+        <article><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#d6b066" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg><h4>Clear prices, no surprises</h4><p>Enter your current and target MMR and see the exact total before you order.</p></article>
+        <article><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#d6b066" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9h10a6 6 0 010 12H8"/><path d="M8 5L4 9l4 4"/></svg><h4>No account needed</h4><p>No sign-up and no payment details on this website. You order with one Discord message.</p></article>
       </div>
     </div>
   </section>
@@ -350,9 +352,9 @@ footer{padding-bottom:84px !important}
       <div class="faq">
         <details><summary>What is the difference between a party boost and a piloted boost?</summary><p>In a party boost you play on your own account and our booster queues with you. In a piloted boost the booster plays on your account. Sharing an account breaks the Steam Subscriber Agreement and can lead to a ban, so we recommend party boosts.</p></details>
         <details><summary>How is the price calculated?</summary><p>Enter your current number and the one you want in the price calculator at the top of the page, for MMR or behavior score. MMR boosts are priced per 100 MMR and cost more in higher brackets. Calibration and low priority are priced per game, coaching per hour, and some services have a flat price. The order window shows the exact total before you pay.</p></details>
-        <details><summary>How can I pay?</summary><p>We accept PayPal only. If you cannot pay with PayPal, send us a message from your wallet or the Contact link and we will find a solution with you.</p></details>
-        <details><summary>When does my order start?</summary><p>Each service lists a start time, usually between one and six hours after the order is placed. Coaching sessions and Battle Cup stacks are scheduled with you.</p></details>
-        <details><summary>Can I get a refund?</summary><p>Yes. As long as the order has not been marked as delivered you can cancel it in your account and the full amount returns to your wallet.</p></details>
+        <details><summary>How can I pay?</summary><p>Payment is agreed with you on Discord before your order starts. No payment is taken on this website.</p></details>
+        <details><summary>When does my order start?</summary><p>Each service lists a start time, usually between one and six hours after the order is confirmed on Discord. Coaching sessions and Battle Cup stacks are scheduled with you.</p></details>
+        <details><summary>Can I get a refund?</summary><p>Refund terms are agreed with you on Discord before you pay.</p></details>
         <details><summary>Which regions do you cover?</summary><p>All services run on the European servers, and all communication is in English.</p></details>
       </div>
     </div>
@@ -364,16 +366,16 @@ footer{padding-bottom:84px !important}
     <div class="foot">
       <div><div class="brand">Highground</div><p style="margin:0;max-width:36ch">Dota 2 boosting, calibration and coaching on European servers.</p></div>
       <div><h5>Services</h5><ul><li><a href="#offers">MMR boost</a></li><li><a href="#offers">Calibration</a></li><li><a href="#offers">Coaching</a></li></ul></div>
-      <div><h5>Company</h5><ul><li><a href="#how">How it works</a></li><li><a href="#why">Why us</a></li><li><a href="#faq">FAQ</a></li><li><button class="linkbtn" type="button" data-open-chat="support" style="color:inherit;text-decoration:none;font-size:inherit">Contact us</button></li></ul></div>
+      <div><h5>Company</h5><ul><li><a href="#how">How it works</a></li><li><a href="#why">Why us</a></li><li><a href="#faq">FAQ</a></li><li><button class="linkbtn" type="button" data-discord style="color:inherit;text-decoration:none;font-size:inherit">Contact us</button></li></ul></div>
       <div><h5>Legal</h5><ul><li>Terms of service</li><li>Privacy policy</li><li>Imprint</li></ul></div>
     </div>
     <div class="legal">Highground is an independent boosting shop concept. It is not affiliated with or endorsed by Valve. Dota 2 is a trademark of Valve Corporation.</div>
   </div>
 </footer>
 
-<button class="fab" type="button" data-open-chat="support" aria-label="Chat with us">
+<button class="fab" type="button" data-discord aria-label="Contact us on Discord">
   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 01-11.8 7L4 20l1.2-4.5A8 8 0 1121 12z"/></svg>
-  Chat with us
+  Discord
 </button>
 
 <dialog id="offer-dlg" aria-labelledby="offer-title"><div class="dlg" id="offer-body"></div></dialog>
@@ -549,9 +551,9 @@ footer{padding-bottom:84px !important}
       '<button class="x" type="button" data-close aria-label="Close">&times;</button></div>'+
       '<p class="desc">'+esc(o.desc)+'</p>'+
       '<div class="tags"><span class="tag'+(o.mode==="pilot"?"":" safe")+'">'+MODE[o.mode]+'</span>'+o.tags.map(function(t){return '<span class="tag">'+esc(t)+'</span>';}).join("")+'</div>'+
-      '<div class="calc">'+calc+'<p class="err" id="c-err" role="alert"></p><div class="total"><span>Total, paid from your wallet into escrow</span><span class="price" id="c-total"></span></div></div>'+
+      '<div class="calc">'+calc+'<p class="err" id="c-err" role="alert"></p><div class="total"><span>Your price</span><span class="price" id="c-total"></span></div></div>'+
       '<div id="c-done"></div>'+
-      '<div class="dlg-actions"><button class="btn ghost" type="button" data-close>Close</button><button class="btn primary" type="button" id="c-buy">Place order</button></div>';
+      '<div class="dlg-actions"><button class="btn ghost" type="button" data-close>Close</button><button class="btn primary" type="button" id="c-buy">Order on Discord</button></div>';
     updateTotal();
     $("offer-dlg").showModal();
   }
@@ -793,7 +795,7 @@ footer{padding-bottom:84px !important}
     $("k-to-l").textContent=mm?"MMR you want":"Behavior score you want";
     $("k-from").step=$("k-to").step=mm?10:100;
     $("k-from").value=calc[tab][0];$("k-to").value=calc[tab][1];
-    $("k-order").textContent=mm?"Order this boost":"Order this recovery";
+    $("k-order").textContent="Order on Discord";
     $("k-done").innerHTML="";calcNow();
   }
   function orderCalc(){
@@ -820,6 +822,40 @@ footer{padding-bottom:84px !important}
   setCalcTab("mmr");
 
   /* selects */
+
+  /* orders go through Discord */
+  var DISCORD="jackhanma14";
+  function discordBox(msg){
+    return '<div class="okbox" style="display:flex;flex-direction:column;gap:8px;align-items:flex-start"><span>To order, add us on Discord:</span><span class="dcname">'+DISCORD+'</span>'+
+      (msg?'<span>and send this message:</span><div class="dcmsg" id="dc-msg">'+esc(msg)+'</div>':'')+
+      '<div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn small primary" type="button" data-copy="'+DISCORD+'">Copy Discord name</button>'+(msg?'<button class="btn small" type="button" data-copy="'+esc(msg)+'">Copy message</button>':'')+'</div></div>';
+  }
+  document.addEventListener("click",function(e){
+    var t=e.target;
+    var cp=t.closest&&t.closest("[data-copy]");
+    if(cp){
+      e.stopPropagation();var old=cp.textContent;
+      try{navigator.clipboard.writeText(cp.dataset.copy).then(function(){cp.textContent="Copied";setTimeout(function(){cp.textContent=old;},1500);},function(){cp.textContent="Select and copy by hand";});}catch(err){cp.textContent="Select and copy by hand";}
+      return;
+    }
+    if(t.id==="c-buy"){
+      e.stopPropagation();
+      var tot=updateTotal();if(tot===null||!current)return;
+      $("c-done").innerHTML=discordBox("Hi, I want to order: "+current.title+" ("+lastDetail+"), price "+eur(tot)+".");
+      return;
+    }
+    if(t.id==="k-order"){
+      e.stopPropagation();
+      var c=calcNow();if(!c)return;
+      $("k-done").innerHTML=discordBox("Hi, I want to order: "+c.title+" ("+c.detail+"), price "+eur(c.total)+".");
+      return;
+    }
+    if(t.closest&&t.closest("[data-discord]")){
+      e.stopPropagation();
+      $("offer-body").innerHTML='<div class="dlg-head"><h3 id="offer-title">Contact us</h3><button class="x" type="button" data-close aria-label="Close">&times;</button></div>'+discordBox("");
+      current=null;if(!$("offer-dlg").open)$("offer-dlg").showModal();
+    }
+  },true);
 
   render();
 })();
