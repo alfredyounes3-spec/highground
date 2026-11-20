@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Highground: Dota 2 boosting, calibration and coaching</title>
-<meta name="description" content="Dota 2 MMR boosting, calibration, low priority and coaching on European servers. See your exact price and order on Discord.">
+<meta name="description" content="Dota 2 MMR boosting, calibration, low priority and coaching on European servers. See your exact price and order with one message.">
 <meta name="theme-color" content="#141b1f">
 <link rel="canonical" href="https://www.dotahighground.com/">
 <link rel="icon" href="/favicon.ico" sizes="48x48">
@@ -266,6 +266,44 @@ dialog[open] .dlg{animation:rise .2s ease-out}
 .calc .total .price{font-size:30px}
 .dlg-actions{display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap}
 
+/* on-site messages */
+.chat-launch{--n:9px;position:fixed;right:18px;bottom:18px;z-index:25;width:56px;height:56px;padding:0;filter:drop-shadow(0 6px 14px rgba(0,0,0,.55))}
+.chat-launch[hidden],.chat[hidden]{display:none}
+.chat{--n:14px;position:fixed;right:18px;bottom:18px;z-index:30;width:min(400px,calc(100vw - 36px));height:min(620px,calc(100dvh - 96px));display:flex;flex-direction:column;filter:drop-shadow(0 12px 30px rgba(0,0,0,.6))}
+.chat-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;padding:16px 18px 12px;border-bottom:1px solid var(--seam)}
+.chat-head h2{margin:0;font-size:21px;color:var(--gilt-hi)}
+.chat-head p{color:var(--ash);font-size:14.5px;margin-top:2px}
+.chat-log{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;padding:16px 18px;display:flex;flex-direction:column;gap:10px}
+.bub{max-width:86%;padding:9px 12px;font-size:15.5px;line-height:1.45;white-space:pre-wrap;overflow-wrap:anywhere}
+.bub.them{align-self:flex-start;background:var(--slate-2);box-shadow:inset 0 0 0 1px var(--seam);border-left:2px solid var(--gilt)}
+.bub.me{align-self:flex-end;background:#243320;box-shadow:inset 0 0 0 1px rgba(111,174,91,.5)}
+.bub.me.failed{box-shadow:inset 0 0 0 1px var(--dire)}
+.bub .who{display:block;font-size:13px;font-weight:700;color:var(--gilt);margin-bottom:2px}
+.bub small{display:block;margin-top:4px;font-size:12.5px;color:var(--ash);white-space:normal}
+.bub.failed small{color:var(--dire-hi)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{border:0;background:none;box-shadow:inset 0 0 0 1px var(--gilt-lo);color:var(--gilt-hi);padding:6px 11px;font-size:14.5px;font-weight:500;text-align:left}
+.chip:hover{box-shadow:inset 0 0 0 1px var(--gilt)}
+.chat-form{display:flex;flex-direction:column;gap:8px;padding:12px 18px 16px;border-top:1px solid var(--seam)}
+.cfield{display:flex;flex-direction:column;gap:5px;font-size:14px;color:var(--ash)}
+.cfield[hidden]{display:none}
+.chat-form input,.chat-form textarea{background:#0f1518;border:1px solid var(--seam);border-radius:0;padding:9px 11px;color:var(--bone);width:100%;font-size:16px}
+.chat-form input:focus,.chat-form textarea:focus{outline:none;border-color:var(--gilt);box-shadow:0 0 0 1px var(--gilt)}
+.chat-form textarea{resize:none;height:66px;line-height:1.4}
+.send-row{display:flex;gap:8px;align-items:stretch}
+.send-row .btn{padding:0 16px}
+.replyto{font-size:14px;color:var(--ash)}
+.replyto b{color:var(--bone)}
+.dc-line{font-size:13.5px;color:var(--ash)}
+.dc-line b{color:var(--bone)}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+.dc-alt{font-size:14.5px;color:var(--ash)}
+.dc-alt b{color:var(--bone)}
+@media (max-width:560px){
+  .chat{--n:0px;right:0;bottom:0;width:100%;height:100%;height:100dvh;filter:none}
+  .chat-launch{right:14px;bottom:14px;width:52px;height:52px}
+}
+
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   .map .lane-seg,.map .mk,.map .node,.map .lbl{transition:none}
@@ -288,7 +326,7 @@ dialog[open] .dlg{animation:rise .2s ease-out}
       <a href="#faq">FAQ</a>
     </nav>
     <div class="spacer"></div>
-    <button class="btn sm" type="button" data-discord>Message us</button>
+    <button class="btn sm" type="button" data-chat>Message us</button>
   </div>
 </header>
 
@@ -297,7 +335,7 @@ dialog[open] .dlg{animation:rise .2s ease-out}
     <div class="wrap hero-grid">
       <div>
         <h1>Take the high ground</h1>
-        <p class="lede">Dota 2 boosting, calibration and coaching from our own team of boosters. Pick a service, see your exact price, and order directly with us on Discord.</p>
+        <p class="lede">Dota 2 boosting, calibration and coaching from our own team of boosters. Pick a service, see your exact price, and order with one message, right here or on Discord.</p>
         <div class="hero-cta">
           <a class="btn go" href="#offers">Browse services</a>
           <a class="btn" href="#how">How it works</a>
@@ -355,14 +393,14 @@ dialog[open] .dlg{animation:rise .2s ease-out}
         <div class="lines" id="k-lines"></div>
         <p class="err" id="k-err" role="alert"></p>
         <div class="total"><span>Your price</span><span class="price" id="k-total" aria-live="polite"></span></div>
-        <button class="btn go" type="button" id="k-order">Order on Discord</button>
+        <button class="btn go" type="button" id="k-order">Order</button>
         <div id="k-done"></div>
       </section>
     </div>
 
     <div class="wrap">
       <div class="trust">
-        <div><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 01-11.8 7L4 20l1.2-4.5A8 8 0 1121 12z"/></svg><p><b>Order on Discord</b><span>Direct contact, no account needed</span></p></div>
+        <div><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 01-11.8 7L4 20l1.2-4.5A8 8 0 1121 12z"/></svg><p><b>Order by message</b><span>On this site or on Discord</span></p></div>
         <div><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"/></svg><p><b>Exact price upfront</b><span>Calculated before you order</span></p></div>
         <div><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.6-3.5 3.2-5.5 6.5-5.5s5.9 2 6.5 5.5"/><path d="M16 4.8a3.5 3.5 0 010 6.4M18.5 14.8c1.7.8 2.7 2.5 3 5.2"/></svg><p><b>Party boost option</b><span>Play on your own account</span></p></div>
         <div><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 3.8 5.5 3.8 9s-1.3 6.5-3.8 9c-2.5-2.5-3.8-5.5-3.8-9S9.5 5.5 12 3z"/></svg><p><b>European servers</b><span>Support in English</span></p></div>
@@ -396,10 +434,10 @@ dialog[open] .dlg{animation:rise .2s ease-out}
   <section class="sec" id="how">
     <div class="wrap">
       <h2>How an order works</h2>
-      <p class="sec-lede">From your first message to your new rank, everything runs through Discord.</p>
+      <p class="sec-lede">From your first message to your new rank, you talk to us directly.</p>
       <ol class="steps">
         <li><div class="mark"><span>I</span></div><div><h3>Pick a service</h3><p>Filter by rank and service. Enter your current and target MMR or behavior score to see the exact price.</p></div></li>
-        <li><div class="mark"><span>II</span></div><div><h3>Message us on Discord</h3><p>Press Order and send the prepared message to jackhanma14. We confirm the price, schedule and payment with you.</p></div></li>
+        <li><div class="mark"><span>II</span></div><div><h3>Send us the order</h3><p>Press Order and send the prepared message, here on the site or on Discord to jackhanma14. We confirm the price, schedule and payment with you.</p></div></li>
         <li><div class="mark"><span>III</span></div><div><h3>Our booster delivers</h3><p>We agree on a start time and keep you updated on Discord. Party boosts are played together on your own account.</p></div></li>
         <li><div class="mark"><span>IV</span></div><div><h3>Target reached</h3><p>We tell you on Discord as soon as your MMR or behavior score target is reached.</p></div></li>
       </ol>
@@ -411,10 +449,10 @@ dialog[open] .dlg{animation:rise .2s ease-out}
       <h2>Built around your account's safety</h2>
       <p class="sec-lede">We keep your account in your hands wherever we can.</p>
       <div class="why">
-        <article><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 01-11.8 7L4 20l1.2-4.5A8 8 0 1121 12z"/></svg><div><h3>Direct contact</h3><p>You talk to us directly on Discord before, during and after your order.</p></div></article>
+        <article><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 01-11.8 7L4 20l1.2-4.5A8 8 0 1121 12z"/></svg><div><h3>Direct contact</h3><p>Message us right here on the site or on Discord, before, during and after your order.</p></div></article>
         <article><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.6-3.5 3.2-5.5 6.5-5.5s5.9 2 6.5 5.5"/><path d="M16 4.8a3.5 3.5 0 010 6.4M18.5 14.8c1.7.8 2.7 2.5 3 5.2"/></svg><div><h3>Party boosts first</h3><p>Wherever possible you play on your own account while our booster queues with you. No login details are shared.</p></div></article>
         <article><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"/></svg><div><h3>Clear prices, no surprises</h3><p>Enter your current and target MMR and see the exact total before you order.</p></div></article>
-        <article><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg><div><h3>No account needed</h3><p>No sign-up and no payment details on this website. You order with one Discord message.</p></div></article>
+        <article><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg><div><h3>No account needed</h3><p>No sign-up and no payment details on this website. You order with one message.</p></div></article>
       </div>
     </div>
   </section>
@@ -422,13 +460,13 @@ dialog[open] .dlg{animation:rise .2s ease-out}
   <section class="sec" id="faq">
     <div class="wrap">
       <h2>Questions before you order</h2>
-      <p class="sec-lede">Still unsure about something? Message us on Discord.</p>
+      <p class="sec-lede">Still unsure about something? <button class="linkbtn" type="button" data-chat>Send us a message</button>.</p>
       <div class="faq">
         <details><summary>What is the difference between a party boost and a piloted boost?</summary><p>In a party boost you play on your own account and our booster queues with you. In a piloted boost the booster plays on your account. Sharing an account breaks the Steam Subscriber Agreement and can lead to a ban, so we recommend party boosts.</p></details>
         <details><summary>How is the price calculated?</summary><p>Enter your current number and the one you want in the price calculator at the top of the page, for MMR or behavior score. MMR boosts are priced per 100 MMR and cost more in higher brackets. Calibration and low priority are priced per game, coaching per hour, and some services have a flat price. The order window shows the exact total before you pay.</p></details>
-        <details><summary>How can I pay?</summary><p>Payment is agreed with you on Discord before your order starts. No payment is taken on this website.</p></details>
-        <details><summary>When does my order start?</summary><p>Each service lists a start time, usually between one and six hours after the order is confirmed on Discord. Coaching sessions and Battle Cup stacks are scheduled with you.</p></details>
-        <details><summary>Can I get a refund?</summary><p>Refund terms are agreed with you on Discord before you pay.</p></details>
+        <details><summary>How can I pay?</summary><p>Payment is agreed with you by message before your order starts. No payment is taken on this website.</p></details>
+        <details><summary>When does my order start?</summary><p>Each service lists a start time, usually between one and six hours after your order is confirmed. Coaching sessions and Battle Cup stacks are scheduled with you.</p></details>
+        <details><summary>Can I get a refund?</summary><p>Refund terms are agreed with you before you pay.</p></details>
         <details><summary>Which regions do you cover?</summary><p>All services run on the European servers, and all communication is in English.</p></details>
       </div>
     </div>
@@ -443,13 +481,38 @@ dialog[open] .dlg{animation:rise .2s ease-out}
         <p style="max-width:36ch">Dota 2 boosting, calibration and coaching on European servers.</p>
       </div>
       <div><h4>Services</h4><ul><li><a href="#offers">MMR boost</a></li><li><a href="#offers">Calibration</a></li><li><a href="#offers">Coaching</a></li></ul></div>
-      <div><h4>Company</h4><ul><li><a href="#how">How it works</a></li><li><a href="#why">Why us</a></li><li><a href="#faq">FAQ</a></li><li><button class="linkbtn" type="button" data-discord>Contact us</button></li></ul></div>
+      <div><h4>Company</h4><ul><li><a href="#how">How it works</a></li><li><a href="#why">Why us</a></li><li><a href="#faq">FAQ</a></li><li><button class="linkbtn" type="button" data-chat>Contact us</button></li></ul></div>
       <div><h4>Legal</h4><ul><li>Terms of service</li><li>Privacy policy</li><li>Imprint</li></ul></div>
     </div>
     <p class="legal">Highground is an independent boosting shop concept. It is not affiliated with or endorsed by Valve. Dota 2 is a trademark of Valve Corporation.</p>
   </div>
 </footer>
 
+
+<button class="btn go chat-launch" type="button" id="chat-open" aria-label="Message us" aria-controls="chat" aria-expanded="false">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 01-11.8 7L4 20l1.2-4.5A8 8 0 1121 12z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01"/></svg>
+</button>
+
+<section class="chat panel" id="chat" role="dialog" aria-labelledby="chat-title" hidden>
+  <div class="chat-head">
+    <div><h2 id="chat-title">Message us</h2><p>Ask about boosts, prices or your order.</p></div>
+    <button class="x" type="button" id="chat-close" aria-label="Close messages">&times;</button>
+  </div>
+  <div class="chat-log" id="chat-log" aria-live="polite"></div>
+  <form class="chat-form" id="chat-form" novalidate>
+    <label class="cfield" for="chat-contact" id="contact-wrap"><span>Your Discord name or email, so we can answer you</span>
+      <input id="chat-contact" maxlength="80" autocomplete="email" autocapitalize="off" spellcheck="false" placeholder="yourname or you@mail.com">
+    </label>
+    <p class="replyto" id="replyto" hidden></p>
+    <div class="send-row">
+      <textarea id="chat-text" maxlength="1000" placeholder="Write a message" aria-label="Message"></textarea>
+      <button class="btn go" type="submit" id="chat-send">Send</button>
+    </div>
+    <p class="err" id="chat-err" role="alert"></p>
+    <input type="checkbox" id="chat-hp" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+    <p class="dc-line">Prefer Discord? Add <b>jackhanma14</b>. <button class="linkbtn" type="button" data-copy="jackhanma14">Copy name</button></p>
+  </form>
+</section>
 
 <dialog id="dlg" aria-labelledby="dlg-title"><div class="dlg panel" id="dlg-body"></div></dialog>
 
@@ -564,7 +627,7 @@ dialog[open] .dlg{animation:rise .2s ease-out}
       '<p class="desc">'+esc(o.desc)+'</p>'+tagsHtml(o)+
       '<div class="calc">'+c+'<p class="err" id="c-err" role="alert"></p><div class="total"><span>Your price</span><span class="price" id="c-total"></span></div></div>'+
       '<div id="c-done"></div>'+
-      '<div class="dlg-actions"><button class="btn" type="button" data-close>Close</button><button class="btn go" type="button" id="c-buy">Order on Discord</button></div>';
+      '<div class="dlg-actions"><button class="btn" type="button" data-close>Close</button><button class="btn go" type="button" id="c-buy">Order</button></div>';
     updateTotal();
     if(!$("dlg").open)$("dlg").showModal();
   }
@@ -664,19 +727,101 @@ dialog[open] .dlg{animation:rise .2s ease-out}
     buildNodes();calcNow(intro);
   }
 
-  /* ordering goes through Discord */
-  function discordBox(msg){
-    return '<div class="dc"><p>To order, add us on Discord:</p><span class="dcname">'+DISCORD+'</span>'+
-      (msg?'<p>and send this message:</p><div class="dcmsg">'+esc(msg)+'</div>':'')+
-      '<div class="dc-acts"><button class="btn go sm" type="button" data-copy="'+DISCORD+'">Copy Discord name</button>'+
-      (msg?'<button class="btn sm" type="button" data-copy="'+esc(msg)+'">Copy message</button>':'')+'</div></div>';
+  /* ordering: send the prepared message here on the site, or on Discord */
+  function orderBox(msg){
+    return '<div class="dc"><p>Send us this order:</p><div class="dcmsg">'+esc(msg)+'</div>'+
+      '<div class="dc-acts"><button class="btn go sm" type="button" data-chat-msg="'+esc(msg)+'">Send as a message</button></div>'+
+      '<p class="dc-alt">Or add <b>'+DISCORD+'</b> on Discord and paste it there. '+
+      '<button class="linkbtn" type="button" data-copy="'+DISCORD+'">Copy name</button> '+
+      '<button class="linkbtn" type="button" data-copy="'+esc(msg)+'">Copy message</button></p></div>';
   }
-  function openContact(){
-    current=null;
-    $("dlg-body").innerHTML='<div class="dlg-head"><h3 id="dlg-title">Contact us</h3><button class="x" type="button" data-close aria-label="Close">&times;</button></div>'+
-      discordBox("").replace("To order, add us on Discord:","Add us on Discord and write us any question:");
-    if(!$("dlg").open)$("dlg").showModal();
+
+  /* on-site messages: each one reaches the shop owner's email through Web3Forms */
+  var W3F_KEY="b85c70d6-26cd-4307-b09c-fc171b0ed6f5";
+  var CHAT_KEY="hg-chat-v1";
+  var WELCOME="Hi! Write us here about boosts, prices or your order. Leave your Discord name or email and we answer you there.";
+  var CHIPS=["I want to order a boost","I have a question about prices","I have a question about my order"];
+  var chat=(function(){
+    var d={contact:"",msgs:[]};
+    try{var v=JSON.parse(localStorage.getItem(CHAT_KEY)||"null");if(v&&Array.isArray(v.msgs)){d.contact=String(v.contact||"");d.msgs=v.msgs.slice(-60);}}catch(e){}
+    d.msgs.forEach(function(m){if(m.status==="sending")m.status="failed";});
+    return d;
+  })();
+  function saveChat(){try{localStorage.setItem(CHAT_KEY,JSON.stringify(chat));}catch(e){}}
+  function isMail(c){return /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(c);}
+  function hhmm(t){try{return new Date(t).toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"});}catch(e){return "";}}
+  function fine(){try{return matchMedia("(pointer:fine)").matches;}catch(e){return true;}}
+  function renderChat(){
+    var h='<div class="bub them"><span class="who">Highground</span>'+esc(WELCOME)+'</div>';
+    if(!chat.msgs.some(function(m){return m.from==="me";}))
+      h+='<div class="chips">'+CHIPS.map(function(c){return '<button class="chip" type="button" data-chip="'+esc(c)+'">'+esc(c)+'</button>';}).join("")+'</div>';
+    chat.msgs.forEach(function(m,i){
+      if(m.from==="them"){h+='<div class="bub them"><span class="who">Highground</span>'+esc(m.text)+'</div>';return;}
+      var st=m.status==="sent"?"Sent "+hhmm(m.t):m.status==="failed"?'Not sent. <button class="linkbtn" type="button" data-retry="'+i+'">Try again</button>':"Sending…";
+      h+='<div class="bub me'+(m.status==="failed"?" failed":"")+'">'+esc(m.text)+'<small>'+st+'</small></div>';
+    });
+    $("chat-log").innerHTML=h;
+    var has=!!chat.contact;
+    $("contact-wrap").hidden=has;$("replyto").hidden=!has;
+    $("replyto").innerHTML=has?'We answer you '+(isMail(chat.contact)?"by email":"on Discord")+' at <b>'+esc(chat.contact)+'</b>. <button class="linkbtn" type="button" id="contact-change">Change</button>':"";
+    var log=$("chat-log");log.scrollTop=log.scrollHeight;
   }
+  function deliver(i){
+    var m=chat.msgs[i];if(!m||m.from!=="me")return;
+    m.status="sending";saveChat();renderChat();
+    var c=m.to||chat.contact,mail=isMail(c);
+    var body={access_key:W3F_KEY,subject:"Website message from "+c,from_name:"Highground website",name:c,
+      message:m.text+"\n\n---\nAnswer this customer "+(mail?"by email: ":"on Discord: ")+c};
+    if(mail)body.email=c;
+    var req;
+    try{req=fetch("https://api.web3forms.com/submit",{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},body:JSON.stringify(body)})
+      .then(function(r){return r.json();}).then(function(j){return !!(j&&j.success);});}
+    catch(e){req=Promise.resolve(false);}
+    req.catch(function(){return false;}).then(function(ok){
+      m.status=ok?"sent":"failed";
+      if(ok&&!chat.msgs.some(function(x){return x.from==="them"&&x.to===c;}))
+        chat.msgs.push({from:"them",to:c,t:Date.now(),text:"Got it, your message reached us. We answer you "+(mail?"by email at ":"on Discord at ")+c+"."});
+      saveChat();renderChat();
+    });
+  }
+  function openChat(prefill){
+    if($("dlg").open)$("dlg").close();
+    $("chat").hidden=false;$("chat-open").hidden=true;$("chat-open").setAttribute("aria-expanded","true");
+    $("chat-err").textContent="";
+    renderChat();
+    if(prefill)$("chat-text").value=prefill;
+    if(fine()||prefill)(chat.contact?$("chat-text"):$("chat-contact")).focus();
+  }
+  function closeChat(){
+    $("chat").hidden=true;$("chat-open").hidden=false;$("chat-open").setAttribute("aria-expanded","false");
+    $("chat-open").focus();
+  }
+  $("chat-open").addEventListener("click",function(){openChat();});
+  $("chat-close").addEventListener("click",closeChat);
+  document.addEventListener("keydown",function(e){if(e.key==="Escape"&&!$("chat").hidden&&!$("dlg").open)closeChat();});
+  $("chat-text").addEventListener("keydown",function(e){
+    if(e.key==="Enter"&&!e.shiftKey&&!e.isComposing&&fine()){e.preventDefault();$("chat-send").click();}
+  });
+  $("chat").addEventListener("click",function(e){
+    var ch=e.target.closest("[data-chip]");if(ch){$("chat-text").value=ch.dataset.chip+". ";$("chat-text").focus();return;}
+    var rt=e.target.closest("[data-retry]");if(rt){deliver(Number(rt.dataset.retry));return;}
+    if(e.target.closest("#contact-change")){$("chat-contact").value=chat.contact;chat.contact="";saveChat();renderChat();$("chat-contact").focus();}
+  });
+  $("chat-form").addEventListener("submit",function(e){
+    e.preventDefault();
+    var text=$("chat-text").value.trim(),c=chat.contact||$("chat-contact").value.trim(),err="";
+    if(!c)err="Enter your Discord name or email so we can answer you.";
+    else if(!chat.contact&&c.indexOf("@")>=0&&!isMail(c))err="That email address looks incomplete.";
+    else if(!chat.contact&&!isMail(c)&&!/^[A-Za-z0-9_.#]{2,37}$/.test(c))err="Enter your Discord name without spaces, or an email address.";
+    else if(!text)err="Write a message first.";
+    $("chat-err").textContent=err;if(err)return;
+    $("chat-text").value="";
+    if($("chat-hp").checked)return;
+    chat.contact=c;
+    chat.msgs.push({from:"me",to:c,text:text,t:Date.now(),status:"sending"});
+    deliver(chat.msgs.length-1);
+    if(fine())$("chat-text").focus();
+  });
 
   /* events */
   $("ranks").addEventListener("click",function(e){var b=e.target.closest("[data-rank]");if(!b)return;var i=Number(b.dataset.rank);state.rank=state.rank===i?-1:i;renderRanks();renderGrid();});
@@ -691,7 +836,7 @@ dialog[open] .dlg{animation:rise .2s ease-out}
     var t=e.target.closest("[data-ctab]");if(t){setCalcTab(t.dataset.ctab);return;}
     if(e.target.closest("#k-order")){
       var c=calcNow();if(!c)return;
-      $("k-done").innerHTML=discordBox("Hi, I want to order: "+c.title+" ("+c.detail+"), price "+eur(c.total)+".");
+      $("k-done").innerHTML=orderBox("Hi, I want to order: "+c.title+" ("+c.detail+"), price "+eur(c.total)+".");
     }
   });
   $("dlg").addEventListener("click",function(e){if(e.target===e.currentTarget)e.currentTarget.close();});
@@ -706,10 +851,11 @@ dialog[open] .dlg{animation:rise .2s ease-out}
     }
     if(t.closest("#c-buy")){
       var tot=updateTotal();if(tot===null||!current)return;
-      $("c-done").innerHTML=discordBox("Hi, I want to order: "+current.title+" ("+lastDetail+"), price "+eur(tot)+".");
+      $("c-done").innerHTML=orderBox("Hi, I want to order: "+current.title+" ("+lastDetail+"), price "+eur(tot)+".");
       return;
     }
-    if(t.closest("[data-discord]")){openContact();}
+    var cm=t.closest("[data-chat-msg]");if(cm){openChat(cm.dataset.chatMsg);return;}
+    if(t.closest("[data-chat]")){openChat();}
   });
 
   render();
